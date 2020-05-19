@@ -1,0 +1,31 @@
+<h1>Bitcoin Rates</h1>
+<div *ngIf="currentPrice">
+    <h2>Time</h2>
+    <div>{{this.currentPrice.time.updated}}</div>
+    <h2>Disclaimer</h2>
+    <div>{{this.currentPrice.disclaimer}}</div>
+    <h2>Rates</h2>
+    <h3>{{this.currentPrice.bpi.BRL.description}}</h3>
+    <h4><span [innerHTML]="this.currentPrice.bpi.BRL.symbol"></span>&nbsp;{{this.currentPrice.bpi.BRL.rate}}</h4>
+    <h3>{{this.currentPrice.bpi.USD.description}}</h3>
+    <h4><span [innerHTML]="this.currentPrice.bpi.USD.symbol"></span>&nbsp;{{this.currentPrice.bpi.USD.rate}}</h4>
+</div>
+<hr/>
+<div>
+    <input type="button" value="Refresh" (click)="update()" />
+    <span>Updated in {{this.lastUpdate | date:"full"}}</span>
+</div>
+
+<h2>Update History</h2>
+<table class="table">
+    <tr>
+        <th scope="col">Timestamp</th>
+        <th scope="col">BRL</th>
+        <th scope="col">USD</th>
+    </tr>
+    <tr *ngFor="let price of this.updateList">
+        <td>{{price.timestamp | date:"full"}}</td>
+        <td>{{price.BRL | currency}}</td>
+        <td>{{price.USD | currency}}</td>
+    </tr>
+</table>
